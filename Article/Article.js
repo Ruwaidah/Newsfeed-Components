@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Professional Software Development in 2019',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -103,6 +119,7 @@ const data = [
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
+
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
   Step 3: return the entire component.
@@ -112,3 +129,53 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createParas(content) {
+  let createPara = document.createElement("p");
+  createPara.textContent = content;
+  return createPara;
+      }
+
+
+function createArticle (obj) {
+  let createDiv = document.createElement("div");
+      createDiv.classList = "article";
+
+  let createH2 = document.createElement("h2");
+      createH2.textContent = obj.title;
+      createDiv.appendChild(createH2);
+
+  let paraDate = document.createTextNode("p");
+      paraDate.classList = "date";
+      paraDate.textContent = obj.date;
+      createDiv.appendChild(paraDate);
+
+  let para1 = createParas(obj.firstParagraph);
+  let para2 = createParas(obj.secondParagraph);
+  let para3 = createParas(obj.thirdParagraph);
+  createDiv.appendChild(para1);
+  createDiv.appendChild(para2);
+  createDiv.appendChild(para3);
+
+
+  let createSpan = document.createElement("span");
+      createSpan.classList = "expandButton";
+      createSpan.textContent = "Read More";
+      createDiv.appendChild(createSpan);
+      createSpan.addEventListener("click", () => {
+        createDiv.classList.toggle("article-open");
+      })
+
+      return createDiv;
+    }
+
+
+
+
+let newArray = data.map(elem => {
+  document.querySelector("body").appendChild(createArticle(elem));
+})
+console.log(newArray);
+
+
+
